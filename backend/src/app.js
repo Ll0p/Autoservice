@@ -14,7 +14,7 @@ async function iniciarServidor() {
     try {
         await sequelize.authenticate();
         await sequelize.sync();
-        console.log('✅ Conexión exitosa a MySQL');
+        console.log('\n✅ Conexión exitosa a MySQL');
         app.listen(PUERTO, () => {
             console.log(`🚀 Servidor en puerto ${PUERTO} en modo ${process.env.NODE_ENV}`);
         });
