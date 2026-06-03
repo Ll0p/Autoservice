@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/usuarios", usuarioRouter);
 
-async function iniciarServidor() {
+function iniciarServidor() {
 
     const sincronizar = () => sequelize.sync({ alter: true });
 
