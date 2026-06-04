@@ -10,7 +10,7 @@ export class ServerError extends Error {
         return {
             status: false,
             code: this.code,
-            mensaje: this.mensaje
+            mensaje: this.message
         }
     }
 }
@@ -19,6 +19,20 @@ export class UsuarioExistenteError extends ServerError {
     constructor() {
         super(409, "EMAIL_YA_EXISTE", "El correo ya está registrado");
         this.name = "UsuarioExistenteError";
+    }
+}
+
+export class UsuarioInexistenteError extends ServerError {
+    constructor() {
+        super(409, "EMAIL_NO_EXISTE", "El correo no está registrado");
+        this.name = "UsuarioInexistenteError";
+    }
+}
+
+export class ContraseniaIncorrectaError extends ServerError {
+    constructor() {
+        super(401, "CONTRASENIA_INCORRECTA", "La contraseña es incorrecta");
+        this.name = "ContraseniaIncorrectaError";
     }
 }
 
