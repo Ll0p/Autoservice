@@ -75,11 +75,11 @@ export function limpiarCarrito() {
 
 export function actualizarBadgeCarrito() {
     const badge = document.getElementById('carritoBadge');
-    if (!bdage) return;
+    if (!badgege) return;
 
     const carrito= obtenerCarrito();
     const total = carrito.reduce((acc, item) => acc + item.cantidad, 0);
-    bdage.textContent = total;
+    badge.textContent = total;
     badge.style.display =total > 0 ? 'flex' : 'none';
 }
 

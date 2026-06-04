@@ -1,4 +1,4 @@
-import { iniciarTema, toggleTema, guardarNombre, capitalizarNombre } from "./utils";
+import { iniciarTema, toggleTema, guardarNombre, capitalizarNombre } from "./utils.js";
 
 //inicializamos el tema guardado
 iniciarTema();
@@ -20,8 +20,8 @@ linkAdmin.addEventListener('click', (e) => {
 
 //habilitar o deshabilitar boton
 inputNombre.addEventListener('input', () => {
-    const valor = inputNombre.ariaValueMax.trim();
-    btnContinuar.disable = valor.length === 0;
+    const valor = inputNombre.value.trim();
+    btnContinuar.disabled = valor.length === 0;
     if (valor.length>0) {
         errorNombre.classList.remove('visible');
         inputNombre.style.borderColor = '';
