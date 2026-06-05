@@ -75,7 +75,7 @@ export function limpiarCarrito() {
 
 export function actualizarBadgeCarrito() {
     const badge = document.getElementById('carritoBadge');
-    if (!badgege) return;
+    if (!badge) return;
 
     const carrito= obtenerCarrito();
     const total = carrito.reduce((acc, item) => acc + item.cantidad, 0);

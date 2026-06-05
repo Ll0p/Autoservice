@@ -31,7 +31,7 @@ inputNombre.addEventListener('input', () => {
 //envio form
 form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const nombre= inputNombre.ariaValueMax.trim();
+    const nombre= inputNombre.value.trim();
     if(!nombre) {
         errorNombre.classList.add('visible');
         inputNombre.style.borderColor = '#EF4444';
@@ -41,7 +41,7 @@ form.addEventListener('submit', (e) => {
     guardarNombre(capitalizarNombre(nombre));
     //animacion de boton
     btnContinuar.textContent= 'Cargando...';
-    btnContinuar.disable = true;
+    btnContinuar.disabled = true;
     setTimeout(() => {
         window.location.href = 'productos.html';
     }, 400);

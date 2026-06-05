@@ -45,7 +45,7 @@ let paginaActual = 1;
 
 const grid = document.getElementById('productosGrid');
 const paginacion = document.getElementById('paginacion');
-const tituloCateg = document.getElementById('titloCategoria');
+const tituloCateg = document.getElementById('tituloCategoria');
 
 const countElementos = document.getElementById('productosCount');
 const btnVideojuegos = document.getElementById('btnVideojuegos');
@@ -53,7 +53,7 @@ const btnConsolas = document.getElementById('btnConsolas');
 
 //botones categorias
 btnVideojuegos.addEventListener('click', ()=> cambiarCategoria('videojuego'));
-btnVideojuegos.addEventListener('click', ()=> cambiarCategoria('consola'));
+btnConsolas.addEventListener('click', ()=> cambiarCategoria('consola'));
 
 function cambiarCategoria(categoria) {
     categoriaActual = categoria;
@@ -153,11 +153,11 @@ function agregarEventosCards() {
 
     grid.querySelectorAll('.btn-sumar').forEach(btn => {
         btn.addEventListener('click', () => {
-            const id = parseInt(btn.database.id);
+            const id = parseInt(btn.dataset.id);
             cambiarCantidad(id,1);
         });
     });
-    grid.querySelectorAll('btn-restar').forEach(btn => {
+    grid.querySelectorAll('.btn-restar').forEach(btn => {
         btn.addEventListener('click', ()=> {
             const id = parseInt(btn.database.id);
             cambiarCantidad(id, -1);
@@ -198,8 +198,8 @@ function cambiarCantidad(id, delta) {
     if (idx === -1) return;
 
 
-    carrito[idx].cantida += delta;
-    if (carrito[idx].cantida <= 0) {
+    carrito[idx].cantidad += delta;
+    if (carrito[idx].cantidad <= 0) {
         carrito.splice(idx, 1);
         mostrarToast('Producto eliminado del carrito', 'info');
     }
