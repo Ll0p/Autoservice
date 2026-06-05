@@ -164,3 +164,102 @@ function agregarEventosCards() {
         });
     });
 }
+
+function agregarAlCarrito(id) {
+    const producto = PRODUCTOS.find(p => p.id === id);
+    if(!producto) return;
+    const carrito = obtenerCarrito();
+    const idx = carrito.findIndex(i => i.id === id);
+
+    if (idx === -1) {
+        carrito.push({
+            id: producto.id,
+            nombre: producto.nombre,
+            precio: producto.precio,
+            imagen: producto.imagen,
+            tipo: producto.tipo,
+            cantida: 1
+        });
+    } else {
+        carrito[idx].cantidad++;
+
+    }
+
+    guardarCarrito(carrito);
+    mostrarToast(`"${producto.nombre}" agregado al carrto`,'success');
+    renderProductos();
+}
+
+
+
+function cambiarCantidad(id, delta) {
+    const carrito = obtenerCarrito();
+    const idx = carrito.findIndex( i => i.id ===id);
+    if (idx === -1) return;
+
+
+    carrito[idx].cantida += delta;
+    if (carrito[idx].cantida <= 0) {
+        carrito.splice(idx, 1);
+        mostrarToast('Producto eliminado del carrito', 'info');
+    }
+
+
+    guardarCarrito(carrito);
+    renderProductos();
+}
+
+function renderPaginacion(totalPags) {
+    if (totalPags <= 1) {
+        paginacion.innerHTML = '';
+        return;
+    }
+    let html = '';
+    html += `
+    <button class="paginacion__btn" id="btnAnterior" ${paginaActual === 1 ? 'disabled' : ''}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"/>
+        </svg>
+    </button>`;
+    for ( let i=1; i <= totalPags; i++) {
+        html += `<button class="paginacion__btn ${i === paginaActual ? 'active' : ''}" data-pag="${i}">${i}</button>`;
+    }
+    html += `
+    <button class="paginacion__btn" id="btnSiguiente" ${paginaActual === totalPags ? 'disabled' : ''}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+        </svg>
+    </button>`;
+
+    paginacion.innerHTML = html;
+    document.getElementById('btnAnterior')?.addEventListener('click', ()=> {
+        if(paginaActual > 1) {
+            paginaActual--;
+            renderProductos();
+            scrollTo(0,0);
+        }
+    });
+    document.getElementById('btnSiguiente')?.addEventListener('click',()=> {
+        if(paginaActual<totalPags) {
+            paginaActual++;
+            renderProductos();
+            scrollTo(0,0);
+        }
+    });
+    
+    paginacion.querySelectorAll('[data-pag]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            paginaActual = parseInt(btn.database.pag);
+            renderProductos();
+            scrollTo(0,0);
+        });
+    });
+}
+renderProductos();
+
+
+
+
+
