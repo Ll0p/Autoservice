@@ -79,7 +79,7 @@ export function actualizarBadgeCarrito() {
 
     const carrito= obtenerCarrito();
     const total = carrito.reduce((acc, item) => acc + item.cantidad, 0);
-    bge.textContent = total;
+    badge.textContent = total;
     badge.style.display =total > 0 ? 'flex' : 'none';
 }
 

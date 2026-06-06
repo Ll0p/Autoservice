@@ -159,7 +159,7 @@ function agregarEventosCards() {
     });
     grid.querySelectorAll('.btn-restar').forEach(btn => {
         btn.addEventListener('click', ()=> {
-            const id = parseInt(btn.database.id);
+            const id = parseInt(btn.dataset.id);
             cambiarCantidad(id, -1);
         });
     });
