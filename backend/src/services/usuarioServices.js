@@ -2,20 +2,20 @@ import bcrypt from "bcrypt";
 import { Usuario } from "../models/index.js";
 import { UsuarioExistenteError } from "../errors/ErrorApp.js";
 
-function encriptarContrasenia(contrasenia) {
-    return bcrypt.hash(contrasenia, 10);
-}
+export const buscarUsuario = (correo) => Usuario.findOne({ where: {correo} });
 
-export function registrarNuevoUsuario(correo, contrasenia) {
-    const verificarDisponibilidad = (usuarioExistente) => {
-        if (usuarioExistente) throw new UsuarioExistenteError();
-        return contrasenia;
-    };
+const verificarDisponibilidad = (usuario, contrasenia) => {
+    if (usuario) throw new UsuarioExistenteError();
+    return contrasenia;
+};
 
-    const guardarUsuario = (contraseniaEncriptada) => Usuario.create({ correo, contrasenia: contraseniaEncriptada });
+const encriptarContrasenia = (contrasenia) => bcrypt.hash(contrasenia, 10);
 
-    return Usuario.findOne({ where: { correo } })
-        .then(verificarDisponibilidad)
+const guardarUsuario = (correo, contrasenia) => Usuario.create({ correo: correo, contrasenia: contrasenia });
+
+export const registrarNuevoUsuario = (correo, contrasenia) => {
+    return buscarUsuario(correo)
+        .then(usuario => verificarDisponibilidad(usuario, contrasenia))
         .then(encriptarContrasenia)
-        .then(guardarUsuario)
-}
+        .then(contraEncriptada => guardarUsuario(correo, contraEncriptada));
+};
