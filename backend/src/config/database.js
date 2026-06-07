@@ -1,7 +1,6 @@
 import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
 
-// Configuramos dotenv manualmente ya que estamos en ES Modules
 dotenv.config();
 
 const sequelize = new Sequelize(
@@ -16,5 +15,4 @@ const sequelize = new Sequelize(
     }
 );
 
-// Exportación nativa de ES Modules
 export default sequelize;

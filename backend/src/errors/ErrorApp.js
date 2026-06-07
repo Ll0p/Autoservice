@@ -29,6 +29,13 @@ export class UsuarioInexistenteError extends ServerError {
     }
 }
 
+export class ProductoInexistenteError extends ServerError {
+    constructor() {
+        super(409, "PRODUCTO_NO_ENCONTRADO", "El producto no existe");
+        this.name = "ProductoInexistenteError";
+    }
+}
+
 export class ContraseniaIncorrectaError extends ServerError {
     constructor() {
         super(401, "CONTRASENIA_INCORRECTA", "La contraseña es incorrecta");

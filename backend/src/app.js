@@ -20,6 +20,8 @@ app.use("/", authRouter);
 
 function iniciarServidor() {
 
+    const probarConexion = () => sequelize.authenticate();
+
     const sincronizar = () => {
         if (process.env.SYNC_DB === 'true') {
             console.log('--> Sincronizando modelos con la base de datos...');
@@ -35,7 +37,7 @@ function iniciarServidor() {
 
     const mostrarError = (error) => console.error(`--> Error de conexión: ${error}`);
 
-    sequelize.authenticate()
+    probarConexion()
         .then(sincronizar)
         .then(mostrarExito)
         .catch(mostrarError);
