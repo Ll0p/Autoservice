@@ -54,7 +54,7 @@ function renderCarrito() {
             <h3>Resumen</h3>
             <div class="resumen-linea">
                 <span>Productos (${totalItems})</span>
-                <span>${formatearPrecio(totalPrecio)}</sapan>
+                <span>${formatearPrecio(totalPrecio)}</span>
             </div>
             <div class="resumen-linea total">
                 <span>Total</span>
@@ -137,7 +137,7 @@ function agregarEventosItems() {
         });
     });
 
-    layout.querySelectorAll('.btn-elminar').forEach(btn => {
+    layout.querySelectorAll('.btn-eliminar').forEach(btn => {
         btn.addEventListener('click', () => {
             const id = parseInt(btn.dataset.id);
             eliminarItem(id);
@@ -159,6 +159,14 @@ function cambiarCantidad(id, delta) {
 
     }
     guardarCarrito(carrito);
+    renderCarrito();
+}
+
+function eliminarItem(id) {
+    const carrito = obtenerCarrito();
+    const nuevo = carrito.filter(i => i.id !== id);
+    guardarCarrito(nuevo);
+    mostrarToast('Producto eliminado del carrito', 'info')
     renderCarrito();
 }
 
