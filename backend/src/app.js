@@ -2,6 +2,7 @@ import express from 'express';
 import path from "path";
 import sequelize from './config/database.js'; 
 import {router as usuarioRouter} from "./routes/usuarioRoutes.js"
+import {router as authRouter} from "./routes/authRoutes.js"
 import { fileURLToPath } from 'url';
 
 const app = express();
@@ -15,10 +16,19 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/usuarios", usuarioRouter);
+app.use("/", authRouter);
 
 function iniciarServidor() {
 
-    const sincronizar = () => sequelize.sync({ alter: true });
+    const probarConexion = () => sequelize.authenticate();
+
+    const sincronizar = () => {
+        if (process.env.SYNC_DB === 'true') {
+            console.log('--> Sincronizando modelos con la base de datos...');
+            return sequelize.sync({ alter: true });
+        }
+        return Promise.resolve(); 
+    };
 
     const mostrarExito = () => {
         console.log('\n--> Conexión exitosa a MySQL...');
@@ -27,7 +37,7 @@ function iniciarServidor() {
 
     const mostrarError = (error) => console.error(`--> Error de conexión: ${error}`);
 
-    sequelize.authenticate()
+    probarConexion()
         .then(sincronizar)
         .then(mostrarExito)
         .catch(mostrarError);

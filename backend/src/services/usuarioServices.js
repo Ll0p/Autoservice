@@ -1,21 +1,8 @@
-import bcrypt from "bcrypt";
-import { Usuario } from "../models/index.js";
-import { UsuarioExistenteError } from "../errors/ErrorApp.js";
+import {buscarUsuario, encriptarContrasenia, guardarUsuario, verificarDisponibilidad} from "../utils/usuarioUtils.js";
 
-function encriptarContrasenia(contrasenia) {
-    return bcrypt.hash(contrasenia, 10);
-}
-
-export function registrarNuevoUsuario(correo, contrasenia) {
-    const verificarDisponibilidad = (usuarioExistente) => {
-        if (usuarioExistente) throw new UsuarioExistenteError();
-        return contrasenia;
-    };
-
-    const guardarUsuario = (contraseniaEncriptada) => Usuario.create({ correo, contrasenia: contraseniaEncriptada });
-
-    return Usuario.findOne({ where: { correo } })
+export const registrarNuevoUsuario = (correo, contrasenia) => {
+    return buscarUsuario(correo)
         .then(verificarDisponibilidad)
-        .then(encriptarContrasenia)
-        .then(guardarUsuario)
-}
+        .then(() => encriptarContrasenia(contrasenia))
+        .then(guardarUsuario(correo));
+};

@@ -1,25 +1,20 @@
-import bcrypt from "bcrypt";
-import { Usuario } from "../models/index.js";
+import { ServerError, ErrorInterno } from "../errors/ErrorApp.js";
 import { autenticarUsuario } from "../services/authServices.js";
 
-export function loguear(req, res) {
-    const { correo, contrasenia } = req.body;
+const responderExito = (res) => res.redirect("/admin/dashboard");
 
-    const responderExito = () => {
-        return res.redirect("/admin/dashboard");
-    };
-
-    const manejarErrores = (error) => {
-        if (error instanceof ServerError) return res.status(error.statusCode).render("login", { error: error.message })
-        console.error(`Error no controlado: ${error}`);
-        return res.status(500).send("Error en el servidor");
-    };
-
-    autenticarUsuario(correo, contrasenia)
-        .then(responderExito)
-        .catch(manejarErrores);
-}
-
-export function mostrarLogin(req, res) {
-    res.render('login', { error: null });
+const manejarErrores = (res) => (error) => {
+    if (error instanceof ServerError) return res.status(error.statusCode).render("login", { error: error.message });
+    console.error(`Error no controlado: ${error}`);
+    const errorInesperado = new ErrorInterno();
+    return res.status(errorInesperado.statusCode).render("login", { error: errorInesperado.message });
 };
+
+export const loguear = (req, res) => {
+    const { correo, contrasenia } = req.body;
+    autenticarUsuario(correo, contrasenia)
+        .then(() => responderExito(res))
+        .catch(manejarErrores(res));
+};
+
+export const mostrarLogin = (req, res) => res.render('login', { error: null });
