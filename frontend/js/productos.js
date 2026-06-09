@@ -146,7 +146,7 @@ function crearCardHTML(producto) {
 function agregarEventosCards() {
     grid.querySelectorAll('.btn-agregar').forEach(btn => {
         btn.addEventListener('click', ()=> {
-            const id = parseInt(btn.database.id);
+            const id = parseInt(btn.dataset.id);
             agregarAlCarrito(id);
         });
     });
@@ -178,7 +178,7 @@ function agregarAlCarrito(id) {
             precio: producto.precio,
             imagen: producto.imagen,
             tipo: producto.tipo,
-            cantida: 1
+            cantidad: 1
         });
     } else {
         carrito[idx].cantidad++;
@@ -251,7 +251,7 @@ function renderPaginacion(totalPags) {
     
     paginacion.querySelectorAll('[data-pag]').forEach(btn => {
         btn.addEventListener('click', () => {
-            paginaActual = parseInt(btn.database.pag);
+            paginaActual = parseInt(btn.dataset.pag);
             renderProductos();
             scrollTo(0,0);
         });
