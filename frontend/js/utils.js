@@ -5,6 +5,7 @@ export function aplicarTema(tema) {
     localStorage.setItem(TEMA_KEY, tema);
     actualizarIconoTema(tema);
 }
+
 export function obtenerTema() {
     return localStorage.getItem(TEMA_KEY) || 'light';
 }
@@ -24,7 +25,7 @@ function actualizarIconoTema(tema) {
         sol.style.display = 'block';
         luna.style.display= 'none';
 
-    }   else {
+    } else {
         sol.style.display= 'none'
         luna.style.display = 'block' 
     }
@@ -38,6 +39,7 @@ export function iniciarTema() {
 
 // Manejo de nombre de usuario
 const NOMBRE_KEY = 'nextplay_nombre';
+
 export function guardarNombre(nombre) {
     sessionStorage.setItem(NOMBRE_KEY, nombre.trim());
 }
@@ -48,7 +50,6 @@ export function obtenerNombre() {
 
 export function limpiarSession() {
     sessionStorage.clear();
-
 }
 
 
@@ -88,8 +89,8 @@ export function mostrarToast(mensaje, tipo ='info', duracion = 3000) {
     let contenedor = document.getElementById('toastContainer');
     if (!contenedor) {
         contenedor = document.createElement('div');
-        contenedor.id= 'toastContainer';
-        contenedor.className ='toast-container';
+        contenedor.id = 'toastContainer';
+        contenedor.className = 'toast-container';
         document.body.appendChild(contenedor);
     }
     const iconos = {

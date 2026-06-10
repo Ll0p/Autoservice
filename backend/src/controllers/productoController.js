@@ -1,5 +1,5 @@
 import { actualizarProducto, cambiarEstadoProducto, crearProducto, leerProductoPorId, listarProductosPaginados} from "../services/productoServices.js";
-import {manejarErrores, responderExito} from "../utils/utilidades.js";
+import { manejarErrores, responderExito } from "../utils/utilidades.js";
 
 // GET /api/productos (Para el cliente, solo activos) [cite: 114, 129]
 export const getProductosCliente = (req, res) => {

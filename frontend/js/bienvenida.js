@@ -46,6 +46,7 @@ form.addEventListener('submit', (e) => {
         window.location.href = 'productos.html';
     }, 400);
 });
+
 //enviar form con enter
 inputNombre.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
