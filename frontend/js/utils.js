@@ -57,7 +57,6 @@ const CARRITO_KEY = 'nextplay_carrito';
 export function obtenerCarrito() {
     try {
         return JSON.parse(localStorage.getItem(CARRITO_KEY)) || [];
-
     } catch {
         return [];
     }
@@ -77,10 +76,10 @@ export function actualizarBadgeCarrito() {
     const badge = document.getElementById('carritoBadge');
     if (!badge) return;
 
-    const carrito= obtenerCarrito();
+    const carrito = obtenerCarrito();
     const total = carrito.reduce((acc, item) => acc + item.cantidad, 0);
     badge.textContent = total;
-    badge.style.display =total > 0 ? 'flex' : 'none';
+    badge.style.display = total > 0 ? 'flex' : 'none';
 }
 
 //notificaciones

@@ -1,4 +1,4 @@
-import { iniciarTema,toggleTema,obtenerNombre,obtenerCarrito,guardarCarrito,actualizarBadgeCarrito,mostrarToast,formatearPrecio } from "./utils.js";
+import { iniciarTema, toggleTema, obtenerNombre, obtenerCarrito, guardarCarrito, actualizarBadgeCarrito, mostrarToast, formatearPrecio } from "./utils.js";
 
 iniciarTema();
 actualizarBadgeCarrito();
@@ -52,8 +52,8 @@ const btnVideojuegos = document.getElementById('btnVideojuegos');
 const btnConsolas = document.getElementById('btnConsolas');
 
 //botones categorias
-btnVideojuegos.addEventListener('click', ()=> cambiarCategoria('videojuego'));
-btnConsolas.addEventListener('click', ()=> cambiarCategoria('consola'));
+btnVideojuegos.addEventListener('click', () => cambiarCategoria('videojuego'));
+btnConsolas.addEventListener('click', () => cambiarCategoria('consola'));
 
 function cambiarCategoria(categoria) {
     categoriaActual = categoria;
@@ -61,20 +61,20 @@ function cambiarCategoria(categoria) {
     btnVideojuegos.classList.toggle('active', categoria === 'videojuego');
     btnConsolas.classList.toggle('active', categoria === 'consola');
 
-    tituloCateg.textContent = categoria=== 'videojuego' ? 'Videojuegos' : 'Consolas';
+    tituloCateg.textContent = categoria === 'videojuego' ? 'Videojuegos' : 'Consolas';
     renderProductos();
 }
 
 function renderProductos() {
     const filtrados = PRODUCTOS.filter(p => p.tipo === categoriaActual && p.activo);
     const total = filtrados.length;
-    const totalPags = Math.ceil(total/PRODUCTOS_POR_PAGINA);
+    const totalPags = Math.ceil(total / PRODUCTOS_POR_PAGINA);
 
     if (paginaActual > totalPags) paginaActual = 1;
-    const inicio = (paginaActual-1) *PRODUCTOS_POR_PAGINA;
-    const pagina = filtrados.slice(inicio,inicio + PRODUCTOS_POR_PAGINA);
+    const inicio = (paginaActual - 1) * PRODUCTOS_POR_PAGINA;
+    const pagina = filtrados.slice(inicio, inicio + PRODUCTOS_POR_PAGINA);
 
-    countElementos.textContent = `${total} productos${total !==1 ? 's' : ''}`;
+    countElementos.textContent = `${total} productos${total !== 1 ? 's' : ''}`;
     
     if (pagina.length === 0) {
         grid.innerHTML = `
@@ -91,6 +91,7 @@ function renderProductos() {
         grid.innerHTML = pagina.map(p => crearCardHTML(p)).join('');
         agregarEventosCards();
     }
+
     renderPaginacion(totalPags);
 }
 
@@ -145,12 +146,11 @@ function crearCardHTML(producto) {
 //eventos de cards
 function agregarEventosCards() {
     grid.querySelectorAll('.btn-agregar').forEach(btn => {
-        btn.addEventListener('click', ()=> {
+        btn.addEventListener('click', () => {
             const id = parseInt(btn.dataset.id);
             agregarAlCarrito(id);
         });
     });
-
     grid.querySelectorAll('.btn-sumar').forEach(btn => {
         btn.addEventListener('click', () => {
             const id = parseInt(btn.dataset.id);
@@ -158,7 +158,7 @@ function agregarEventosCards() {
         });
     });
     grid.querySelectorAll('.btn-restar').forEach(btn => {
-        btn.addEventListener('click', ()=> {
+        btn.addEventListener('click', () => {
             const id = parseInt(btn.dataset.id);
             cambiarCantidad(id, -1);
         });
@@ -167,7 +167,7 @@ function agregarEventosCards() {
 
 function agregarAlCarrito(id) {
     const producto = PRODUCTOS.find(p => p.id === id);
-    if(!producto) return;
+    if (!producto) return;
     const carrito = obtenerCarrito();
     const idx = carrito.findIndex(i => i.id === id);
 
@@ -182,7 +182,6 @@ function agregarAlCarrito(id) {
         });
     } else {
         carrito[idx].cantidad++;
-
     }
 
     guardarCarrito(carrito);
@@ -194,16 +193,14 @@ function agregarAlCarrito(id) {
 
 function cambiarCantidad(id, delta) {
     const carrito = obtenerCarrito();
-    const idx = carrito.findIndex( i => i.id ===id);
+    const idx = carrito.findIndex(i => i.id ===id);
     if (idx === -1) return;
-
 
     carrito[idx].cantidad += delta;
     if (carrito[idx].cantidad <= 0) {
         carrito.splice(idx, 1);
         mostrarToast('Producto eliminado del carrito', 'info');
     }
-
 
     guardarCarrito(carrito);
     renderProductos();
@@ -214,6 +211,7 @@ function renderPaginacion(totalPags) {
         paginacion.innerHTML = '';
         return;
     }
+
     let html = '';
     html += `
     <button class="paginacion__btn" id="btnAnterior" ${paginaActual === 1 ? 'disabled' : ''}>
@@ -222,9 +220,11 @@ function renderPaginacion(totalPags) {
             <polyline points="15 18 9 12 15 6"/>
         </svg>
     </button>`;
+
     for ( let i=1; i <= totalPags; i++) {
         html += `<button class="paginacion__btn ${i === paginaActual ? 'active' : ''}" data-pag="${i}">${i}</button>`;
     }
+
     html += `
     <button class="paginacion__btn" id="btnSiguiente" ${paginaActual === totalPags ? 'disabled' : ''}>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -234,21 +234,20 @@ function renderPaginacion(totalPags) {
     </button>`;
 
     paginacion.innerHTML = html;
-    document.getElementById('btnAnterior')?.addEventListener('click', ()=> {
-        if(paginaActual > 1) {
+    document.getElementById('btnAnterior')?.addEventListener('click', () => {
+        if (paginaActual > 1) {
             paginaActual--;
             renderProductos();
             scrollTo(0,0);
         }
     });
-    document.getElementById('btnSiguiente')?.addEventListener('click',()=> {
-        if(paginaActual<totalPags) {
+    document.getElementById('btnSiguiente')?.addEventListener('click',() => {
+        if (paginaActual < totalPags) {
             paginaActual++;
             renderProductos();
             scrollTo(0,0);
         }
     });
-    
     paginacion.querySelectorAll('[data-pag]').forEach(btn => {
         btn.addEventListener('click', () => {
             paginaActual = parseInt(btn.dataset.pag);
@@ -257,9 +256,5 @@ function renderPaginacion(totalPags) {
         });
     });
 }
+
 renderProductos();
-
-
-
-
-
