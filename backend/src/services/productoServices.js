@@ -1,5 +1,6 @@
 import { ProductoInexistenteError } from "../errors/ErrorApp.js";
 import { Producto } from "../models/index.js";
+import { buscarProducto, verificarProducto } from "../utils/productoUtils.js";
 
 // Listar productos con paginación. Si 'soloActivos' es true, filtra para el cliente.
 export const listarProductosPaginados = (page = 1, limit = 6, soloActivos = false) => {
@@ -20,20 +21,14 @@ export const listarProductosPaginados = (page = 1, limit = 6, soloActivos = fals
     });
 };
 
-// Buscar un producto por ID (útil para la pantalla de detalle o edición) [cite: 70, 194]
-export const buscarProductoPorId = (id) => {
-    const buscarProducto = (id) => Producto.findByPk(id);
-    return buscarProducto(id)
-        .then(producto => {
-            if (!producto) throw new ProductoInexistenteError();
-            return producto;
-        });
-};
+// Buscar un producto por ID (útil para la pantalla de detalle o edición)
+export const leerProductoPorId = (id) => buscarProducto(id).then(verificarProducto);
 
-// Crear producto (activo por defecto) [cite: 169]
-export const registrarProducto = (datosProducto) => Producto.create(datosProducto);
+// Crear producto (activo por defecto) 
+export const crearProducto = (datos) => Producto.create(datos);
 
-// Modificar producto [cite: 166]
+// Hay logica repetida, pero no molesta por ahora, tengo que ver como lo hago mas declarativo
+// Modificar producto
 export const actualizarProducto = (id, datosActualizados) => {
     return Producto.update(datosActualizados, { where: { id } })
         .then(([rowsUpdated]) => {
@@ -42,7 +37,7 @@ export const actualizarProducto = (id, datosActualizados) => {
         });
 };
 
-// Cambiar estado (Baja lógica / Reactivación) [cite: 167, 168]
+// Cambiar estado (Baja lógica / Reactivación)
 export const cambiarEstadoProducto = (id, nuevoEstado) => {
     return Producto.update({ activo: nuevoEstado }, { where: { id } })
         .then(([rowsUpdated]) => {

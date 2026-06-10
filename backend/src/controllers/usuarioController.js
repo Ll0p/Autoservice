@@ -1,14 +1,7 @@
-import { ServerError, ErrorInterno } from "../errors/ErrorApp.js"
+import { manejarErrores } from "../utils/utilidades.js";
 import { registrarNuevoUsuario } from "../services/usuarioServices.js";
 
 const responderExito = (nuevoUsuario) => res.status(201).json({id: nuevoUsuario.id, correo: nuevoUsuario.correo, mensaje: "Usuario administrador creado correctamente"});
-
-const manejarErrores = (res) => (error) => {
-    if (error instanceof ServerError) return res.status(error.statusCode).json(error.aResponse());
-    console.error(`Error no controlado: ${error}`);
-    const errorInesperado = new ErrorInterno();
-    return res.status(errorInesperado.statusCode).json(errorInesperado.aResponse());
-};
 
 export const createUsuario = (req, res) => {
     const { correo, contrasenia } = req.body;
