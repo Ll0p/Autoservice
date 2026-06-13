@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { activarProducto, createProducto, desactivarProducto, getProducto, getProductosAdmin,  getProductosCliente, updateProducto } from "../controllers/productoController.js";
-import { subidorArchivos } from "../utils/multerUtils.js"; "../utils/multerUtils.js";
+import { activarProducto, createProducto, desactivarProducto, getProducto, getProductosAdmin, getProductosCliente, updateProducto } from "../controllers/productoController.js";
+import { subidorArchivos } from "../utils/multerUtils.js";
 
 export const router = Router();
 

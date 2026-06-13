@@ -13,31 +13,33 @@ if (!nombre) {
 document.getElementById('saludo').textContent = `¡Hola ${nombre}! Explora nuestros productos`;
 
 //datos harcodeados momentaneamente
-const PRODUCTOS = [
-    // Videojuegos
-    { id: 1,  nombre: 'The Legend of Zelda: Tears of the Kingdom', precio: 14999, imagen: null, tipo: 'videojuego', activo: true },
-    { id: 2,  nombre: 'Red Dead Redemption 2',                     precio: 9999,  imagen: null, tipo: 'videojuego', activo: true },
-    { id: 3,  nombre: 'God of War Ragnarök',                       precio: 12999, imagen: null, tipo: 'videojuego', activo: true },
-    { id: 4,  nombre: 'Elden Ring',                                precio: 11999, imagen: null, tipo: 'videojuego', activo: true },
-    { id: 5,  nombre: 'Hogwarts Legacy',                           precio: 10999, imagen: null, tipo: 'videojuego', activo: true },
-    { id: 6,  nombre: 'Spider-Man 2',                              precio: 13999, imagen: null, tipo: 'videojuego', activo: true },
-    { id: 7,  nombre: 'Cyberpunk 2077',                            precio: 8999,  imagen: null, tipo: 'videojuego', activo: true },
-    { id: 8,  nombre: 'FIFA 25',                                   precio: 11999, imagen: null, tipo: 'videojuego', activo: true },
-    { id: 9,  nombre: 'Baldur\'s Gate 3',                          precio: 12499, imagen: null, tipo: 'videojuego', activo: true },
-    { id: 10, nombre: 'Starfield',                                 precio: 9499,  imagen: null, tipo: 'videojuego', activo: true },
-    { id: 11, nombre: 'Alan Wake 2',                               precio: 10499, imagen: null, tipo: 'videojuego', activo: true },
-    { id: 12, nombre: 'Mortal Kombat 1',                           precio: 11499, imagen: null, tipo: 'videojuego', activo: true },
-    // Consolas
-    { id: 13, nombre: 'PlayStation 5 Slim',                        precio: 299999, imagen: null, tipo: 'consola', activo: true },
-    { id: 14, nombre: 'Xbox Series X',                             precio: 289999, imagen: null, tipo: 'consola', activo: true },
-    { id: 15, nombre: 'Nintendo Switch OLED',                      precio: 179999, imagen: null, tipo: 'consola', activo: true },
-    { id: 16, nombre: 'PlayStation 5 Digital Edition',             precio: 259999, imagen: null, tipo: 'consola', activo: true },
-    { id: 17, nombre: 'Xbox Series S',                             precio: 199999, imagen: null, tipo: 'consola', activo: true },
-    { id: 18, nombre: 'Nintendo Switch Lite',                      precio: 129999, imagen: null, tipo: 'consola', activo: true },
-    { id: 19, nombre: 'Steam Deck OLED',                           precio: 349999, imagen: null, tipo: 'consola', activo: true },
-    { id: 20, nombre: 'PlayStation 4 Slim',                        precio: 149999, imagen: null, tipo: 'consola', activo: true },
-    { id: 21, nombre: 'Xbox One S',                                precio: 139999, imagen: null, tipo: 'consola', activo: true },
-];
+// const PRODUCTOS = [
+//     // Videojuegos
+//     { id: 1,  nombre: 'The Legend of Zelda: Tears of the Kingdom', precio: 14999, imagen: null, tipo: 'videojuego', activo: true },
+//     { id: 2,  nombre: 'Red Dead Redemption 2',                     precio: 9999,  imagen: null, tipo: 'videojuego', activo: true },
+//     { id: 3,  nombre: 'God of War Ragnarök',                       precio: 12999, imagen: null, tipo: 'videojuego', activo: true },
+//     { id: 4,  nombre: 'Elden Ring',                                precio: 11999, imagen: null, tipo: 'videojuego', activo: true },
+//     { id: 5,  nombre: 'Hogwarts Legacy',                           precio: 10999, imagen: null, tipo: 'videojuego', activo: true },
+//     { id: 6,  nombre: 'Spider-Man 2',                              precio: 13999, imagen: null, tipo: 'videojuego', activo: true },
+//     { id: 7,  nombre: 'Cyberpunk 2077',                            precio: 8999,  imagen: null, tipo: 'videojuego', activo: true },
+//     { id: 8,  nombre: 'FIFA 25',                                   precio: 11999, imagen: null, tipo: 'videojuego', activo: true },
+//     { id: 9,  nombre: 'Baldur\'s Gate 3',                          precio: 12499, imagen: null, tipo: 'videojuego', activo: true },
+//     { id: 10, nombre: 'Starfield',                                 precio: 9499,  imagen: null, tipo: 'videojuego', activo: true },
+//     { id: 11, nombre: 'Alan Wake 2',                               precio: 10499, imagen: null, tipo: 'videojuego', activo: true },
+//     { id: 12, nombre: 'Mortal Kombat 1',                           precio: 11499, imagen: null, tipo: 'videojuego', activo: true },
+//     // Consolas
+//     { id: 13, nombre: 'PlayStation 5 Slim',                        precio: 299999, imagen: null, tipo: 'consola', activo: true },
+//     { id: 14, nombre: 'Xbox Series X',                             precio: 289999, imagen: null, tipo: 'consola', activo: true },
+//     { id: 15, nombre: 'Nintendo Switch OLED',                      precio: 179999, imagen: null, tipo: 'consola', activo: true },
+//     { id: 16, nombre: 'PlayStation 5 Digital Edition',             precio: 259999, imagen: null, tipo: 'consola', activo: true },
+//     { id: 17, nombre: 'Xbox Series S',                             precio: 199999, imagen: null, tipo: 'consola', activo: true },
+//     { id: 18, nombre: 'Nintendo Switch Lite',                      precio: 129999, imagen: null, tipo: 'consola', activo: true },
+//     { id: 19, nombre: 'Steam Deck OLED',                           precio: 349999, imagen: null, tipo: 'consola', activo: true },
+//     { id: 20, nombre: 'PlayStation 4 Slim',                        precio: 149999, imagen: null, tipo: 'consola', activo: true },
+//     { id: 21, nombre: 'Xbox One S',                                precio: 139999, imagen: null, tipo: 'consola', activo: true },
+// ];
+
+const PRODUCTOS = []
 
 const PRODUCTOS_POR_PAGINA = 9;
 let categoriaActual = 'videojuego';
@@ -54,6 +56,24 @@ const btnConsolas = document.getElementById('btnConsolas');
 //botones categorias
 btnVideojuegos.addEventListener('click', () => cambiarCategoria('videojuego'));
 btnConsolas.addEventListener('click', () => cambiarCategoria('consola'));
+
+function cargarProductosDesdeApi() {
+
+    const respuestaToJSON = (respuesta) => respuesta.json();
+
+    const cargarProductos = (data) => {PRODUCTOS = data.productos};
+
+    const enviarError = (error) => {
+            console.error("Error al obtener los productos: ", error);
+            grid.innerHTML = `<div class="productos-vacio"><p>Error al conectar con el servidor.</p></div>`;
+        };
+
+    fetch('http://localhost:3000/api/productos?limit=100')
+        .then(respuestaToJSON)
+        .then(cargarProductos)
+        .then(renderProductos)
+        .catch(enviarError);
+}
 
 function cambiarCategoria(categoria) {
     categoriaActual = categoria;
