@@ -25,7 +25,7 @@ function actualizarIconoTema(tema) {
         sol.style.display = 'block';
         luna.style.display= 'none';
     } else {
-        sol.style.display= 'none'
+        sol.style.display = 'none'
         luna.style.display = 'block' 
     }
 }  
