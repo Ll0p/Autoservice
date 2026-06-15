@@ -24,7 +24,6 @@ function actualizarIconoTema(tema) {
     if (tema === 'dark') {
         sol.style.display = 'block';
         luna.style.display= 'none';
-
     } else {
         sol.style.display= 'none'
         luna.style.display = 'block' 
@@ -85,7 +84,7 @@ export function actualizarBadgeCarrito() {
 
 //notificaciones
 
-export function mostrarToast(mensaje, tipo ='info', duracion = 3000) {
+export function mostrarToast(mensaje, tipo = 'info', duracion = 3000) {
     let contenedor = document.getElementById('toastContainer');
     if (!contenedor) {
         contenedor = document.createElement('div');

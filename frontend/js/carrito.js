@@ -1,8 +1,9 @@
-import { iniciarTema, toggleTema, obtenerNombre, obtenerCarrito, guardarCarrito, limpiarCarrito,actualizarBadgeCarrito,mostrarToast, formatearPrecio } from './utils.js'
+import { iniciarTema, toggleTema, obtenerNombre, obtenerCarrito, guardarCarrito, limpiarCarrito,actualizarBadgeCarrito,mostrarToast, formatearPrecio } from './utils.js';
 
-iniciarTema()
-actualizarBadgeCarrito()
+iniciarTema();
+actualizarBadgeCarrito();
 document.getElementById('btnTema').addEventListener('click', toggleTema);
+
 const nombre = obtenerNombre();
 if (!nombre) {
     window.location.href = 'index.html';
@@ -40,8 +41,8 @@ function renderCarrito() {
             </div>`;
         return;
     }
-    const totalItems = carrito.reduce((acc,i) => acc +i.cantidad, 0);
-    const totalPrecio = carrito.reduce((acc,i) => acc+i.precio * i.cantidad, 0);
+    const totalItems = carrito.reduce((acc, i) => acc + i.cantidad, 0);
+    const totalPrecio = carrito.reduce((acc, i) => acc + i.precio * i.cantidad, 0);
     subtitulo.textContent= `${totalItems} productos${totalItems !== 1 ? 's' : ''} en tu carrito.`;
 
     const listaHTML = `
@@ -78,7 +79,7 @@ function renderCarrito() {
         </div>`;
     
     layout.innerHTML = listaHTML + resumenHTML;
-    agregarEventosItems()
+    agregarEventosItems();
     document.getElementById('btnConfirmar').addEventListener('click', abrirModalConfirmar);
 }
 
@@ -126,13 +127,13 @@ function agregarEventosItems() {
     layout.querySelectorAll('.btn-sumar').forEach(btn => {
         btn.addEventListener('click', () => {
             const id = parseInt(btn.dataset.id);
-            cambiarCantidad(id,1);
+            cambiarCantidad(id, 1);
         });
     });
     layout.querySelectorAll('.btn-restar').forEach(btn => {
         btn.addEventListener('click', () => {
             const id = parseInt(btn.dataset.id);
-            cambiarCantidad(id,-1);
+            cambiarCantidad(id, -1);
         });
     });
 
@@ -142,7 +143,6 @@ function agregarEventosItems() {
             eliminarItem(id);
         });
     });
-
 }
 
 function cambiarCantidad(id, delta) {
@@ -165,16 +165,15 @@ function eliminarItem(id) {
     const carrito = obtenerCarrito();
     const nuevo = carrito.filter(i => i.id !== id);
     guardarCarrito(nuevo);
-    mostrarToast('Producto eliminado del carrito', 'info')
+    mostrarToast('Producto eliminado del carrito', 'info');
     renderCarrito();
 }
 
 function abrirModalConfirmar() {
     const carrito = obtenerCarrito();
     const total = carrito.reduce((acc, i) => acc + i.precio * i.cantidad, 0);
-    modalTexto.textContent= `¿Quieres confirmar tu compra? Precio total: ${formatearPrecio(total)} A nombre de ${nombre}`;
+    modalTexto.textContent = `¿Quieres confirmar tu compra? Precio total: ${formatearPrecio(total)} A nombre de ${nombre}`;
     modalConfirmar.classList.add('visible');
-
 }
 
 function cerrarModal() {
@@ -189,18 +188,16 @@ modalConfirmar.addEventListener('click', (e) => {
 btnConfirmarModal.addEventListener('click', () => {
     cerrarModal();
     const carrito = obtenerCarrito();
-    const total = carrito.reduce((acc, i) => acc + i.precio * i.cantidad,0);
+    const total = carrito.reduce((acc, i) => acc + i.precio * i.cantidad, 0);
     const venta = {
         nombre,
-        fecha: new Date().toLocaleDateString('es-AR', {
-            day: '2-digit', month: '2-digit', year: 'numeric'
-        }),
+        fecha: new Date().toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric' }),
         productos: carrito,
         total
     };
     sessionStorage.setItem('nextplay_venta', JSON.stringify(venta));
     limpiarCarrito();
-    window.location.href= 'ticket.html';
+    window.location.href = 'ticket.html';
 });
 
 renderCarrito();

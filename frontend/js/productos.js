@@ -78,7 +78,6 @@ function cambiarCategoria(categoria) {
     paginaActual = 1;
     btnVideojuegos.classList.toggle('active', categoria === 'videojuego');
     btnConsolas.classList.toggle('active', categoria === 'consola');
-
     tituloCateg.textContent = categoria === 'videojuego' ? 'Videojuegos' : 'Consolas';
     renderProductos();
 }
@@ -104,7 +103,7 @@ function renderProductos() {
             </svg>
             <p>No hay productos disponibles en esta categoría.</p>
         </div>
-        `
+        `;
     } else {
         grid.innerHTML = pagina.map(p => crearCardHTML(p)).join('');
         agregarEventosCards();

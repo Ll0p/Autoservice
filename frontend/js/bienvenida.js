@@ -14,7 +14,7 @@ btnTema.addEventListener('click', toggleTema);
 
 // panel admin, aun no listo
 linkAdmin.addEventListener('click', (e) => {
-    e.preventDefault()
+    e.preventDefault();
     alert('panel admin en trabajo');
 });
 
@@ -22,7 +22,7 @@ linkAdmin.addEventListener('click', (e) => {
 inputNombre.addEventListener('input', () => {
     const valor = inputNombre.value.trim();
     btnContinuar.disabled = valor.length === 0;
-    if (valor.length>0) {
+    if (valor.length > 0) {
         errorNombre.classList.remove('visible');
         inputNombre.style.borderColor = '';
     } 
@@ -31,8 +31,8 @@ inputNombre.addEventListener('input', () => {
 //envio form
 form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const nombre= inputNombre.value.trim();
-    if(!nombre) {
+    const nombre = inputNombre.value.trim();
+    if (!nombre) {
         errorNombre.classList.add('visible');
         inputNombre.style.borderColor = '#EF4444';
         inputNombre.focus();
@@ -40,7 +40,7 @@ form.addEventListener('submit', (e) => {
     }
     guardarNombre(capitalizarNombre(nombre));
     //animacion de boton
-    btnContinuar.textContent= 'Cargando...';
+    btnContinuar.textContent = 'Cargando...';
     btnContinuar.disabled = true;
     setTimeout(() => {
         window.location.href = 'productos.html';
