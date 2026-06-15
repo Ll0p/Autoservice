@@ -3,19 +3,19 @@ import { Producto } from "../models/index.js";
 import { buscarProducto, verificarProducto } from "../utils/productoUtils.js";
 
 // Listar productos con paginación. Si 'soloActivos' es true, filtra para el cliente.
-export const listarProductosPaginados = (page = 1, limit = 6, soloActivos = false) => {
-    const offset = (page - 1) * limit;
+export const listarProductosPaginados = (pagina = 1, limite = 6, soloActivos = false) => {
+    const offset = (pagina - 1) * limite;
     const whereClause = soloActivos ? { activo: true } : {}; // El cliente solo ve activos [cite: 114, 129]
 
     return Producto.findAndCountAll({
         where: whereClause,
-        limit: parseInt(limit),
+        limit: parseInt(limite),
         offset: parseInt(offset)
     }).then(resultado => {
         return {
             totalItems: resultado.count,
-            paginasTotales: Math.ceil(resultado.count / limit),
-            paginaActual: parseInt(page),
+            paginasTotales: Math.ceil(resultado.count / limite),
+            paginaActual: parseInt(pagina),
             productos: resultado.rows
         };
     });

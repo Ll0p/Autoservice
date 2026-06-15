@@ -31,10 +31,10 @@ export const createProducto = (req, res) => {
     // Si se subió un archivo, Multer lo deja en req.file 
     const imagen = req.file ? `/uploads/${req.file.filename}` : null;
     const datos = { nombre, precio, tipo, imagen }
-    const responder = (nuevoProducto) => res.status(201).json({ status: true, producto: nuevoProducto });
+    const enviarExito = (nuevoProducto) => res.status(201).json({ status: true, producto: nuevoProducto });
     
     crearProducto(datos)
-        .then(responder)
+        .then(enviarExito)
         .catch(manejarErrores(res));
 };
 

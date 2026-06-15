@@ -13,7 +13,6 @@ const subtitulo = document.getElementById('subtituloCarrito');
 const modalConfirmar = document.getElementById('modalConfirmar');
 const modalTexto = document.getElementById('modalTexto');
 const btnCancelarModal = document.getElementById('btnCancelarModal');
-
 const btnConfirmarModal = document.getElementById('btnConfirmarModal');
 
 function renderCarrito() {
@@ -205,9 +204,3 @@ btnConfirmarModal.addEventListener('click', () => {
 });
 
 renderCarrito();
-
-
-
-
-
-
