@@ -3,7 +3,7 @@ import { Producto } from "../models/index.js";
 import { buscarProducto, verificarProducto } from "../utils/productoUtils.js";
 
 // Listar productos con paginación. Si 'soloActivos' es true, filtra para el cliente.
-export const listarProductosPaginados = (pagina = 1, limite = 6, soloActivos = false) => {
+export const listarProductosPaginados = (pagina = 1, limite = 9, soloActivos = false) => {
     const offset = (pagina - 1) * limite;
     const whereClause = soloActivos ? { activo: true } : {}; // El cliente solo ve activos [cite: 114, 129]
 

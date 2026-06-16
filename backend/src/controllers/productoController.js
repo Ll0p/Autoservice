@@ -3,16 +3,16 @@ import { manejarErrores, responderExito } from "../utils/utilidades.js";
 
 // GET /api/productos (Para el cliente, solo activos) [cite: 114, 129]
 export const getProductosCliente = (req, res) => {
-    const { page, limit } = req.query;
-    listarProductosPaginados(page, limit, true)
+    const { pagina, limite } = req.query;
+    listarProductosPaginados(pagina, limite, true)
         .then(responderExito(res))
         .catch(manejarErrores(res));
 };
 
 // GET /api/productos/admin (Para el dashboard, ve todos) [cite: 162]
 export const getProductosAdmin = (req, res) => {
-    const { page, limit } = req.query;
-    listarProductosPaginados(page, limit, false)
+    const { pagina, limite } = req.query;
+    listarProductosPaginados(pagina, limite, false)
         .then(responderExito(res))
         .catch(manejarErrores(res));
 };
@@ -32,7 +32,6 @@ export const createProducto = (req, res) => {
     const imagen = req.file ? `/uploads/${req.file.filename}` : null;
     const datos = { nombre, precio, tipo, imagen }
     const enviarExito = (nuevoProducto) => res.status(201).json({ status: true, producto: nuevoProducto });
-    
     crearProducto(datos)
         .then(enviarExito)
         .catch(manejarErrores(res));
