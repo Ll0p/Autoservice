@@ -1,4 +1,4 @@
-import { buscarUsuario } from "./usuarioServices.js";
+import { buscarUsuario } from "../utils/usuarioUtils.js";
 import { validarUsuario, validarContra } from "../utils/authUtils.js";
 
 export const autenticarUsuario = (correo, contrasenia) => {

@@ -1,4 +1,4 @@
-import { ServerError } from "../errors/ErrorApp";
+import { ServerError } from "../errors/ErrorApp.js";
 
 export const manejarErrores = (res) => (error) => {
     if (error instanceof ServerError) return res.status(error.statusCode).json(error.aResponse());

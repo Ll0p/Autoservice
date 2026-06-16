@@ -1,4 +1,4 @@
-import {buscarUsuario, encriptarContrasenia, guardarUsuario, verificarDisponibilidad} from "../utils/usuarioUtils.js";
+import { buscarUsuario, encriptarContrasenia, guardarUsuario, verificarDisponibilidad } from "../utils/usuarioUtils.js";
 
 export const registrarNuevoUsuario = (correo, contrasenia) => {
     return buscarUsuario(correo)

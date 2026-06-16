@@ -28,4 +28,4 @@ const configAlmacenamiento = multer.diskStorage({
     filename: definirNombreArchivo
 });
 
-export const subidorArchivos = multer({ storage: storage });
+export const subidorArchivos = multer({ storage: configAlmacenamiento });
