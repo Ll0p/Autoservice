@@ -24,14 +24,14 @@ export class UsuarioExistenteError extends ServerError {
 
 export class UsuarioInexistenteError extends ServerError {
     constructor() {
-        super(409, "EMAIL_NO_EXISTE", "El correo no está registrado");
+        super(404, "EMAIL_NO_EXISTE", "El correo no está registrado");
         this.name = "UsuarioInexistenteError";
     }
 }
 
 export class ProductoInexistenteError extends ServerError {
     constructor() {
-        super(409, "PRODUCTO_NO_ENCONTRADO", "El producto no existe");
+        super(404, "PRODUCTO_NO_EXISTE", "El producto no existe");
         this.name = "ProductoInexistenteError";
     }
 }

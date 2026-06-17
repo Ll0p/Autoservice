@@ -8,4 +8,4 @@ export const verificarDisponibilidad = (usuario) => {if (usuario) throw new Usua
 
 export const encriptarContrasenia = (contrasenia) => bcrypt.hash(contrasenia, 10);
 
-export const guardarUsuario = (correo) =>  (contrasenia) => Usuario.create({ correo: correo, contrasenia: contrasenia });
+export const guardarUsuario = (correo) => (contrasenia) => Usuario.create({ correo: correo, contrasenia: contrasenia });
