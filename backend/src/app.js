@@ -5,6 +5,7 @@ import sequelize from './config/database.js';
 import {router as usuarioRouter} from "./routes/usuarioRoutes.js";
 import {router as authRouter} from "./routes/authRoutes.js";
 import {router as productoRouter} from "./routes/productoRoutes.js";
+import {router as ventaRouter} from "./routes/ventaRoutes.js";
 import { fileURLToPath } from 'url';
 
 const app = express();
@@ -23,6 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/usuarios", usuarioRouter);
 app.use("/api/productos", productoRouter);
+app.use("/api/ventas", ventaRouter)
 app.use("/", authRouter);
 
 function iniciarServidor() {

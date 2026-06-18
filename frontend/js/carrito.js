@@ -1,4 +1,5 @@
 import { iniciarTema, toggleTema, obtenerNombre, obtenerCarrito, guardarCarrito, limpiarCarrito,actualizarBadgeCarrito,mostrarToast, formatearPrecio } from './utils.js';
+import { apiVentas } from './api/cliente-api.js';
 
 iniciarTema();
 actualizarBadgeCarrito();
@@ -189,15 +190,31 @@ btnConfirmarModal.addEventListener('click', () => {
     cerrarModal();
     const carrito = obtenerCarrito();
     const total = carrito.reduce((acc, i) => acc + i.precio * i.cantidad, 0);
-    const venta = {
-        nombre,
-        fecha: new Date().toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric' }),
-        productos: carrito,
-        total
+    const datos = {
+        nombreCliente: nombre,
+        total,
+        productos: carrito.map((item) => ({
+            id: item.id,
+            cantidad: item.cantidad,
+            precio: item.precio,
+        })),
     };
-    sessionStorage.setItem('nextplay_venta', JSON.stringify(venta));
-    limpiarCarrito();
-    window.location.href = 'ticket.html';
+    btnConfirmarModal.disable = true;
+    btnConfirmarModal.textContent = 'Procesando...';
+
+    const manejarExito = (respuesta) => {
+        limpiarCarrito();
+        sessionStorage.setItem('nextplay_venta_id', respuesta.venta.id);
+        window.location.href = 'ticket.html';
+    };
+
+    const manejarError = (error) => {
+        console.error('Error al crear la venta:',error);
+        mostrarToast('Hubo un error al procesar la compra. Intente de nuevo', 'error');
+        btnConfirmarModal.disable = false;
+        btnConfirmarModal.textContent = 'Confirmar';
+    };
+    apiVentas.crear(datos).then(manejarExito).catch(manejarError);
 });
 
 renderCarrito();

@@ -1,4 +1,5 @@
-import { Venta, VentaProducto } from "../models/index.js";
+import { Venta, Producto, VentaProducto } from "../models/index.js";
+import { ventaInexistenteError } from "../errors/ErrorApp.js";
 
 export const guardarVenta = (nombreCliente, total) => Venta.create({nombreCliente: nombreCliente, total: total});
 
@@ -12,3 +13,20 @@ export const guardarDetallesVenta = (productos) => (nuevaVenta) => {
 
     return VentaProducto.bulkCreate(detallesVenta).then(() => nuevaVenta);
 };
+
+export const buscarVentaConDetalle = (id) => Venta.findByPk(id, {
+    include: [{
+        model: Producto,
+        as: "productos",
+        through: { attributes: ["cantida", "precio_unitario"]}
+    
+    }]
+    
+});
+
+export const verificarVenta = (venta) => {
+    if (!venta) throw new ventaInexistenteError();
+    return venta;
+
+};
+

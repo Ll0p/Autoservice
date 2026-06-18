@@ -49,3 +49,10 @@ export class ErrorInterno extends ServerError {
         this.name = "ErrorInterno";
     }
 }
+
+export class ventaInexistenteError extends ServerError {
+    constructor() {
+        super(404, "VENTA_NO_EXISTE", "La venta no existe");
+        this.name = "VentaInexistenteError";
+    }
+}
