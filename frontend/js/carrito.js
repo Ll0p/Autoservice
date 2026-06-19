@@ -44,7 +44,7 @@ function renderCarrito() {
     }
     const totalItems = carrito.reduce((acc, i) => acc + i.cantidad, 0);
     const totalPrecio = carrito.reduce((acc, i) => acc + i.precio * i.cantidad, 0);
-    subtitulo.textContent= `${totalItems} productos${totalItems !== 1 ? 's' : ''} en tu carrito.`;
+    subtitulo.textContent= `${totalItems} producto${totalItems !== 1 ? 's' : ''} en tu carrito.`;
 
     const listaHTML = `
         <div class="carrito-lista">
@@ -199,7 +199,7 @@ btnConfirmarModal.addEventListener('click', () => {
             precio: item.precio,
         })),
     };
-    btnConfirmarModal.disable = true;
+    btnConfirmarModal.disabled = true;
     btnConfirmarModal.textContent = 'Procesando...';
 
     const manejarExito = (respuesta) => {
@@ -211,7 +211,7 @@ btnConfirmarModal.addEventListener('click', () => {
     const manejarError = (error) => {
         console.error('Error al crear la venta:',error);
         mostrarToast('Hubo un error al procesar la compra. Intente de nuevo', 'error');
-        btnConfirmarModal.disable = false;
+        btnConfirmarModal.disabled = false;
         btnConfirmarModal.textContent = 'Confirmar';
     };
     apiVentas.crear(datos).then(manejarExito).catch(manejarError);

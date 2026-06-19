@@ -22,7 +22,7 @@ const formatearFecha = (fecha) => new Date(fecha).toLocaleDateString("es-AR", {
 const amarDatosPlantilla = (venta) => {
     const productos = venta.productos.map((producto) => {
         const cantidad = producto.VentaProducto.cantidad;
-        const precioUnitario = producto.VentaProducto.precioUnitario;
+        const precioUnitario = producto.VentaProducto.precio_unitario;
         const subtotal = cantidad * precioUnitario;
         return {
             nombre: producto.nombre,
@@ -33,7 +33,7 @@ const amarDatosPlantilla = (venta) => {
     });
     return {
         id: venta.id,
-        nombreCliente: venta.nombreCliente,
+        nombreCliente: venta.nombre_cliente,
         fecha: formatearFecha(venta.fecha),
         total: formatearMoneda(venta.total),
         productos

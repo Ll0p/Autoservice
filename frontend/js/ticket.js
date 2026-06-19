@@ -7,8 +7,8 @@ document.getElementById('btnTema').addEventListener('click', toggleTema);
 const nombre = obtenerNombre();
 if (!nombre) window.location.href = 'index.html';
 
-const ventaID = sessionStorage.getItem('nextplay_venta_id');
-if (!ventaID) window.location.href = 'index.html';
+const ventaId = sessionStorage.getItem('nextplay_venta_id');
+if (!ventaId) window.location.href = 'index.html';
 
 const contenedor = document.getElementById('ticketContenido');
 function formatearFecha(fechaISO) {
@@ -20,8 +20,8 @@ function formatearFecha(fechaISO) {
 function renderTicket(venta) {
     const productos = venta.productos;
     const filasHTML = productos.map((p)=> {
-        const cantidad = p.ventaProducto.cantidad;
-        const precioUnit = p.ventaProducto.precio_unitario;
+        const cantidad = p.VentaProducto.cantidad;
+        const precioUnit = p.VentaProducto.precio_unitario;
         const subtotal = cantidad * precioUnit;
         return `
             <tr>
