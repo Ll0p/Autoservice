@@ -1,6 +1,8 @@
 import { iniciarTema, toggleTema, obtenerNombre, obtenerCarrito, guardarCarrito, actualizarBadgeCarrito, mostrarToast, formatearPrecio } from "./utils.js";
 import { apiProductos } from "./api/cliente-api.js";
 
+const BACKEND_URL = "http://localhost:3000"
+
 iniciarTema();
 actualizarBadgeCarrito();
 document.getElementById('btnTema').addEventListener('click', toggleTema);
@@ -105,9 +107,11 @@ function crearCardHTML(producto) {
     const carrito = obtenerCarrito();
     const enCarrito = carrito.find((i) => i.id === producto.id);
     const cantidad = enCarrito ? enCarrito.cantidad : 0;
+    const imgUrl = producto.imagen.startsWith('http') ? producto.imagen : `${BACKEND_URL}${producto.imagen}`;
+
 
     const imgHTML = producto.imagen
-        ? `<img class="producto-card__img" src="http://localhost:3000${producto.imagen}" alt="${producto.nombre}" loading="lazy" />`
+        ? `<img class="producto-card__img" src="${imgUrl}" alt="${producto.nombre}" loading="lazy" onerror="this.src='./public/assets/logo.png'" />`
         : `<div class="producto-card__img-placeholder">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
